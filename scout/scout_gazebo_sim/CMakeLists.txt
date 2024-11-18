@@ -1,47 +1,63 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(scout_gazebo_sim)
 
-add_compile_options(-std=c++11)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(catkin REQUIRED COMPONENTS    
-    roslaunch 
-    roslint 
-    roscpp 
-    std_msgs
-    sensor_msgs
-    geometry_msgs
-    tf2 
-    tf2_ros
-)
-catkin_package(
-  INCLUDE_DIRS include
-#   LIBRARIES 
-  CATKIN_DEPENDS roscpp sensor_msgs
-#   DEPENDS Boost
-)
+# Find necessary packages
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(gazebo_ros REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 ###########
 ## Build ##
 ###########
 
+# Include directories for this project
 include_directories(
-    include
-    ${catkin_INCLUDE_DIRS}
+  include
+  ${ament_INCLUDE_DIRS}
+  ${geometry_msgs_INCLUDE_DIRS}
 )
 
+# Create a static library
 add_library(scout_gazebo STATIC src/scout_skid_steer.cpp)
-target_link_libraries(scout_gazebo ${catkin_LIBRARIES})
 
+ament_target_dependencies(scout_gazebo
+  rclcpp
+  geometry_msgs
+  sensor_msgs
+  gazebo_ros
+  std_msgs
+  nav_msgs
+  tf2
+  tf2_ros
+)
+
+# Create an executable for the skid steer controller
 add_executable(scout_skid_steer_controller src/scout_skid_steer_controller.cpp)
-target_link_libraries(scout_skid_steer_controller scout_gazebo ${catkin_LIBRARIES})
+target_link_libraries(scout_skid_steer_controller scout_gazebo)
+ament_target_dependencies(scout_skid_steer_controller
+  rclcpp
+  geometry_msgs
+  sensor_msgs
+  gazebo_ros
+)
 
 #############
 ## Install ##
 #############
 
-roslaunch_add_file_check(launch)
-
+# Specify where to install files
 install(
   DIRECTORY launch worlds
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  DESTINATION share/${PROJECT_NAME}
 )
+
+ament_package()

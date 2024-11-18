@@ -27,19 +27,19 @@
 ​	Download and install ros-control function package, ros-control is the robot control middleware provided by ROS
 
 ```
-sudo apt-get install ros-melodic-ros-control
+sudo apt-get install ros-humble-ros2-control
 ```
 
 ​	Download and install ros-controllers function package, ros-controllers are the kinematics plug-in of common models provided by ROS
 
 ```
-sudo apt-get install ros-melodic-ros-controllers
+sudo apt-get install ros-humble-ros2-controllers
 ```
 
 ​	Download and install gazebo-ros function package, gazebo-ros is the communication interface between gazebo and ROS, and connect the ROS and Gazebo
 
 ```
-sudo apt-get install ros-melodic-gazebo-ros
+sudo apt-get install ros-humble-gazebo-ros
 ```
 
 ​	Download and install gazebo-ros-control function package, gazebo-ros-control is the communication standard controller between ROS and Gazebo
@@ -51,13 +51,13 @@ sudo apt-get install ros-melodic-gazebo-ros-control
 ​	Download and install joint-state-publisher-gui package.This package is used to visualize the joint control.
 
 ```
-sudo apt-get install ros-melodic-joint-state-publisher-gui 
+sudo apt-get install ros-humble-joint-state-publisher-gui 
 ```
 
 ​	Download and install teleop-twist-keyboard function package, telop-twist-keyboard is keyboard control function package, the robot can be controlled to move forward, left, right and backward through "i", "j", "l",and "," on the keyboard
 
 ```
-sudo apt-get install ros-melodic-teleop-twist-keyboard 
+sudo apt-get install ros-humble-teleop-twist-keyboard 
 ```
 
 
@@ -146,7 +146,7 @@ roslaunch scout_description display_scout_v2.launch
 ​	Run the start file of scout_mini model and visualize the model in Rviz
 
 ```
-roslaunch scout_description display_scout_mini.launch 
+roslaunch scout_description display_scout_mini.launch
 ```
 
 ![img](image/scout_mini_rviz.png) 

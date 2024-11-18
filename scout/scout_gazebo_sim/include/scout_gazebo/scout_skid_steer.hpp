@@ -1,25 +1,18 @@
-/*
- * scout_skid_steer.hpp
- *
- * Created on: Mar 25, 2020 22:52
- * Description:
- *
- * Copyright (c) 2019 Ruixiang Du (rdu)
- */
-
 #ifndef SCOUT_SKID_STEER_HPP
 #define SCOUT_SKID_STEER_HPP
 
-#include <geometry_msgs/Twist.h>
-#include <ros/ros.h>
-
+#include "rclcpp/rclcpp.hpp"
+#include "geometry_msgs/msg/twist.hpp"
+#include "std_msgs/msg/float64.hpp" // Add this include
 #include <string>
 
 namespace wescore {
-class ScoutSkidSteer {
+class ScoutSkidSteer : public rclcpp::Node {
  public:
-  ScoutSkidSteer(ros::NodeHandle *nh, std::string robot_name = "");
+  // Constructor (ROS 2 version, no NodeHandle)
+  explicit ScoutSkidSteer(std::string robot_name = "");
 
+  // Method to setup the subscription
   void SetupSubscription();
 
  private:
@@ -33,16 +26,16 @@ class ScoutSkidSteer {
   const double SCOUT_WHEELBASE = 0.498;
   const double SCOUT_WHEEL_RADIUS = 0.16459;
 
-  ros::NodeHandle *nh_;
+  // ROS 2 publisher and subscriber
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr motor_fr_pub_;
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr motor_fl_pub_;
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr motor_rl_pub_;
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr motor_rr_pub_;
 
-  ros::Publisher motor_fr_pub_;
-  ros::Publisher motor_fl_pub_;
-  ros::Publisher motor_rl_pub_;
-  ros::Publisher motor_rr_pub_;
+  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_sub_;
 
-  ros::Subscriber cmd_sub_;
-
-  void TwistCmdCallback(const geometry_msgs::Twist::ConstPtr &msg);
+  // Callback function for the Twist command
+  void TwistCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg);
 };
 }  // namespace wescore
 
