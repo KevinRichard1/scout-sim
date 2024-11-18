@@ -146,7 +146,7 @@ roslaunch scout_description display_scout_v2.launch
 ​	Run the start file of scout_mini model and visualize the model in Rviz
 
 ```
-roslaunch scout_description display_scout_mini.launch
+ros2 launch scout_description display_scout_mini.launch.py
 ```
 
 ![img](image/scout_mini_rviz.png) 
