@@ -2,21 +2,25 @@ import os
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration, FindPackageShare
+from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import Command
 
 def generate_launch_description():
-    # Get the file paths for URDF and RViz configuration
-    urdf_file = os.path.join(
-        FindPackageShare('scout_description').find('scout_description'),
-        'urdf', 'scout_mini.urdf'
-    )
+    # Paths for URDF and RViz files
+    urdf_file = PathJoinSubstitution([
+        FindPackageShare('scout_description'),
+        'urdf',
+        'scout_mini.urdf'
+    ])
 
-    rviz_config_file = os.path.join(
-        FindPackageShare('scout_description').find('scout_description'),
-        'rviz', 'scout_mini_model_display.rviz'
-    )
+    rviz_config_file = PathJoinSubstitution([
+        FindPackageShare('scout_description'),
+        'rviz',
+        'scout_mini_model_display.rviz'
+    ])
 
-    # Define launch arguments
+
     return LaunchDescription([
         # Declare launch arguments
         DeclareLaunchArgument('model', default_value='scout_mini', description='Robot model'),
@@ -28,7 +32,7 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
-            parameters=[{'robot_description': urdf_file}]
+            parameters=[{'robot_description': Command(['xacro ', urdf_file])}]
         ),
 
         # Joint state publisher node
@@ -45,6 +49,7 @@ def generate_launch_description():
             executable='rviz2',
             name='rviz',
             output='screen',
-            arguments=['-d', rviz_config_file]
+            arguments=['-d', rviz_config_file],
+            additional_env={'LIBGL_ALWAYS_SOFTWARE': '1'}
         ),
     ])

@@ -42,5 +42,6 @@
 
   <!-- Export (empty in this case) -->
   <export>
+    <build_type>ament_cmake</build_type> 
   </export>
 </package>
