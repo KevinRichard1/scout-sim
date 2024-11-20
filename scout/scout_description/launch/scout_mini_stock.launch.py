@@ -1,15 +1,20 @@
 import os
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, SetParameter
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration, FindPackageShare
+from launch.substitutions import LaunchConfiguration
+from launch.actions import DeclareLaunchArgument
 import xacro
+from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
+    # Declare launch arguments
+    DeclareLaunchArgument('robot_namespace', default_value='/')
+    DeclareLaunchArgument('urdf_extras', default_value='empty.urdf')
+
     # Get paths for URDF and xacro
     xacro_file = os.path.join(
         FindPackageShare('scout_description').find('scout_description'),
-        'urdf', 'mini.xacro'
+        'urdf', 'scout_mini.urdf'
     )
 
     urdf_extras = os.path.join(

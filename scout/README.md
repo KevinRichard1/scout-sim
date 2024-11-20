@@ -132,13 +132,7 @@ cd scout_ws
 ​	Declare the environment variable
 
 ```
-source devel/setup.bash
-```
-
-​	Run the start file of scout_v2 model and visualize the model in Rviz
-
-```
-roslaunch scout_description display_scout_v2.launch 
+source install/setup.bash
 ```
 
 ![img](image/scoutv2_rviz.png) 
@@ -162,13 +156,13 @@ cd scout_ws
 ​	Declare the environment variable
 
 ```
-source devel/setup.bash
+source install/setup.bash
 ```
 
 ​	Start the simulation environment of scout_v2
 
 ```
-roslaunch scout_gazebo_sim scout_empty_world.launch
+ros2 launch scout_gazebo_sim scout_mini_empty_world.launch.py
 ```
 
 ![img](image/scoutv2_gazebo.png) 
@@ -176,7 +170,7 @@ roslaunch scout_gazebo_sim scout_empty_world.launch
 #Control by keyboard, the scout2.0 and scout_mini can be controlled to move forward, left, right and backward through "i", "j", "l",and "," on the keyboard
 
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py 
+ros2 run teleop_twist_keyboard teleop_twist_keyboard 
 ```
 
 ![img](image/teleop.png) 
@@ -184,7 +178,7 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ​	Start the simulation environment of scout_mini
 
 ```
-roslaunch scout_gazebo_sim scout_mini_playpen.launch
+ros2 launch scout_gazebo_sim scout_mini_playpen.launch.py
 ```
 
 ![img](image/scout_mini_gazebo.png) 
@@ -192,7 +186,7 @@ roslaunch scout_gazebo_sim scout_mini_playpen.launch
 #Control by keyboard, the scout2.0 and scout_mini can be controlled to move forward, left, right and backward through "i", "j", "l",and "," on the keyboard
 
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py 
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
 ![img](image/teleop.png) 

@@ -17,7 +17,7 @@ def generate_launch_description():
     rviz_config_file = PathJoinSubstitution([
         FindPackageShare('scout_description'),
         'rviz',
-        'scout_mini_model_display.rviz'
+        'model_display.rviz'
     ])
 
 

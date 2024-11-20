@@ -9,10 +9,11 @@ namespace wescore {
 ScoutSkidSteer::ScoutSkidSteer(std::string robot_name)
     : rclcpp::Node("scout_skid_steer"), robot_name_(robot_name) {
 
-  motor_fr_topic_ = robot_name_ + "/scout_motor_fr_controller/command";
-  motor_fl_topic_ = robot_name_ + "/scout_motor_fl_controller/command";
-  motor_rl_topic_ = robot_name_ + "/scout_motor_rl_controller/command";
-  motor_rr_topic_ = robot_name_ + "/scout_motor_rr_controller/command";
+  motor_fr_topic_ = robot_name_ + "scout_motor_fr_controller/command";
+  motor_fl_topic_ = robot_name_ + "scout_motor_fl_controller/command";
+  motor_rl_topic_ = robot_name_ + "scout_motor_rl_controller/command";
+  motor_rr_topic_ = robot_name_ + "scout_motor_rr_controller/command";
+  std::string robot_name_ = "scout";
   cmd_topic_ = robot_name_ + "/cmd_vel";
 
   // Create the publishers for the motor command topics

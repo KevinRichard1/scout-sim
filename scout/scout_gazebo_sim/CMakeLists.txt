@@ -48,16 +48,32 @@ ament_target_dependencies(scout_skid_steer_controller
   geometry_msgs
   sensor_msgs
   gazebo_ros
+  std_msgs
+  nav_msgs
+  tf2
+  tf2_ros
 )
 
 #############
 ## Install ##
 #############
 
-# Specify where to install files
+# Install launch files to the appropriate share folder
 install(
-  DIRECTORY launch worlds
-  DESTINATION share/${PROJECT_NAME}
+  DIRECTORY launch/
+  DESTINATION share/${PROJECT_NAME}/launch
+)
+
+# Install worlds files to the appropriate share folder (if a 'worlds' folder exists)
+install(
+  DIRECTORY worlds/
+  DESTINATION share/${PROJECT_NAME}/worlds
+)
+
+# Install the C++ executable to the lib folder (corrected from installing Python scripts)
+install(
+  TARGETS scout_skid_steer_controller
+  DESTINATION lib/scout_gazebo_sim
 )
 
 ament_package()

@@ -20,8 +20,8 @@
     <xacro:property name="base_z_size" value="0.235000" />
 
     <xacro:property name="wheelbase" value="0.3132556"/>
-   <xacro:property name="track" value="0.4563536" />
-   <xacro:property name="wheel_vertical_offset" value="-0.077" />
+    <xacro:property name="track" value="0.4563536" />
+    <xacro:property name="wheel_vertical_offset" value="-0.077" />
 
 <!--    <xacro:property name="track" value="0.3426" />
     <xacro:property name="wheelbase" value="0.3181"/>
