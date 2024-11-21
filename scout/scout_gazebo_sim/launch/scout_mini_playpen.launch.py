@@ -6,10 +6,22 @@ from launch.substitutions import Command
 from launch import LaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription
+from launch.actions import ExecuteProcess
+from ament_index_python.packages import get_package_share_directory
 import os
 
+os.environ["LIBGL_ALWAYS_SOFTWARE"] = "1"
+
 def generate_launch_description():
+    world_file = get_package_share_directory('scout_gazebo_sim') + '/worlds/clearpath_playpen.world'
+
     return LaunchDescription([
+        ExecuteProcess(
+            cmd=['gazebo', '--verbose', world_file, '-s', 'libgazebo_noaudio.so'],
+            output='screen'
+        ),
+
+
         DeclareLaunchArgument(
             'robot_namespace', default_value='/',
             description='Namespace for the robot'
@@ -81,7 +93,7 @@ def generate_launch_description():
                 ),
                 '-entity', 'scout_mini',
                 '-robot_namespace', LaunchConfiguration('robot_namespace'),
-                '-x', '0.0', '-y', '0.0', '-z', '0.0'
+                '-x', '0.0', '-y', '0.0', '-z', '0.2'
             ],
             output='screen',
         ),

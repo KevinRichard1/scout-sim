@@ -1,0 +1,18 @@
+<sdf version='1.7'>
+  <model name='scout_mini'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0.015 0.023132 0 0 -0 0</pose>
+        <mass>132.39</mass>
+        <inertia>
+          <ixx>0.185196</ixx>
+          <ixy>4.30144e-08</ixy>
+          <ixz>5.81038e-08</ixz>
+          <iyy>0.364894</iyy>
+          <iyz>-0.00038672</iyz>
+          <izz>0.223869</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+</sdf>

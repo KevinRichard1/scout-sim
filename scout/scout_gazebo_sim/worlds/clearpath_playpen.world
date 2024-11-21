@@ -27,7 +27,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <world name='default'>
     <plugin name="gazebo_ros_factory" filename="libgazebo_ros_factory.so">
       <ros>
-          <namespace>/</namespace>
+        <namespace>/</namespace>
       </ros>
     </plugin>
 
