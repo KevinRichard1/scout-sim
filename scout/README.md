@@ -116,7 +116,7 @@ rosdep install --from-paths src --ignore-src -r -y
 ​		Compile
 
 ```
-catkin_make
+colcon build --symlink-install
 ```
 
 

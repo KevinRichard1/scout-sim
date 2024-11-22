@@ -7,13 +7,25 @@ from launch import LaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription
 from launch.actions import ExecuteProcess
+from launch.substitutions import PathJoinSubstitution
+
 from ament_index_python.packages import get_package_share_directory
 import os
 
+scout_description_path = os.path.join(
+    get_package_share_directory('scout_description'), 'share'
+)
+os.environ['GAZEBO_MODEL_PATH'] = f"{os.environ.get('GAZEBO_MODEL_PATH', '')}:{scout_description_path}"
 os.environ["LIBGL_ALWAYS_SOFTWARE"] = "1"
 
 def generate_launch_description():
     world_file = get_package_share_directory('scout_gazebo_sim') + '/worlds/clearpath_playpen.world'
+
+    urdf_file = PathJoinSubstitution([
+        FindPackageShare('scout_description'),
+        'urdf',
+        'scout_mini.urdf'
+    ])
 
     return LaunchDescription([
         ExecuteProcess(
@@ -40,15 +52,7 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
-            parameters=[{
-                'robot_description': Command([
-                    'xacro ',
-                    os.path.join(
-                        FindPackageShare('scout_description').find('scout_description'),
-                        'urdf/scout_mini.xacro'
-                    )
-                ])
-            }]
+            parameters=[{'robot_description': Command(['xacro ', urdf_file])}]
         ),
         
         # Start Gazebo server
