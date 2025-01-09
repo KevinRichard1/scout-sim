@@ -28,7 +28,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         ExecuteProcess(
-            cmd=['gazebo', '--verbose', world_file, '-s', 'libgazebo_noaudio.so'],
+            cmd=['gazebo', '--verbose', world_file],
             output='screen'
         ),
 

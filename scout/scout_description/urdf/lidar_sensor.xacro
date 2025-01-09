@@ -25,7 +25,7 @@
 
   <!-- Joint to Base Link -->
   <joint name="lidar_joint" type="fixed">
-    <origin xyz="0 0 0.3" rpy="0 0 0" />
+    <origin xyz="0 0 0.2" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="lidar_link" />
   </joint>
@@ -65,5 +65,6 @@
       </plugin>
     </sensor>
   </gazebo>
+
 
 </robot>
