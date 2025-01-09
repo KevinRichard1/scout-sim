@@ -8,7 +8,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription
 from launch.actions import ExecuteProcess
 from launch.substitutions import PathJoinSubstitution
-
 from ament_index_python.packages import get_package_share_directory
 import os
 
@@ -24,7 +23,7 @@ def generate_launch_description():
     urdf_file = PathJoinSubstitution([
         FindPackageShare('scout_description'),
         'urdf',
-        'scout_mini.urdf'
+        'scout_mini.xacro'
     ])
 
     return LaunchDescription([
@@ -91,10 +90,7 @@ def generate_launch_description():
             executable='spawn_entity.py',
             name='spawn_entity',
             arguments=[
-                '-file', os.path.join(
-                    FindPackageShare('scout_description').find('scout_description'),
-                    'urdf/scout_mini.xacro'
-                ),
+                '-file', urdf_file,
                 '-entity', 'scout_mini',
                 '-robot_namespace', LaunchConfiguration('robot_namespace'),
                 '-x', '0.0', '-y', '0.0', '-z', '0.2'

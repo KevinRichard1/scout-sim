@@ -11,7 +11,7 @@ def generate_launch_description():
     urdf_file = PathJoinSubstitution([
         FindPackageShare('scout_description'),
         'urdf',
-        'scout_mini.urdf'
+        'scout_mini.xacro'
     ])
 
     rviz_config_file = PathJoinSubstitution([

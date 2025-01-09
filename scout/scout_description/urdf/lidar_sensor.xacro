@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- 3D LiDAR Link -->
+  <link name="lidar_link">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder radius="0.1" length="0.05" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <material name="Gazebo/Black" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.1" length="0.05" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </collision>
+  </link>
+
+  <!-- Joint to Base Link -->
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0 0 0.3" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lidar_link" />
+  </joint>
+
+  <!-- Gazebo Plugin for 3D LiDAR -->
+  <gazebo reference="lidar_link">
+    <sensor type="gpu_ray" name="lidar">
+      <pose>0 0 0 0 0 0</pose>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>16</samples>
+            <min_angle>-0.2618</min_angle>
+            <max_angle>0.2618</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.1</min>
+          <max>100.0</max>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_cloud" filename="libgazebo_ros_point_cloud.so">
+        <topic_name>/points</topic_name>
+        <frame_name>lidar_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

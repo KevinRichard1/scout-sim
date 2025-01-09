@@ -37,7 +37,7 @@ Reference:
         <kd>0.0</kd>
         <minDepth>0.001</minDepth>
         <fdir1>1 0 0</fdir1>
-
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="front_right_wheel_link">
         <mu1>0.9</mu1>
@@ -46,7 +46,7 @@ Reference:
         <kd>0.0</kd>
         <minDepth>0.001</minDepth>
         <fdir1>1 0 0</fdir1>
-
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="rear_left_wheel_link">
         <mu1>0.9</mu1>
@@ -55,7 +55,7 @@ Reference:
         <kd>0.0</kd>
         <minDepth>0.001</minDepth>
         <fdir1>1 0 0</fdir1>
-
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="rear_right_wheel_link">
         <mu1>0.9</mu1>
@@ -64,7 +64,7 @@ Reference:
         <kd>0.0</kd>
         <minDepth>0.001</minDepth>
         <fdir1>1 0 0</fdir1>
-        <!--maxContacts value="64"/-->
+        <material>Gazebo/Black</material>
     </gazebo>
     
     <!-- <gazebo>
